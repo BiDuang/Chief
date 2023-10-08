@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chief", "Chief.csproj", "{5A85FCAF-DAAC-4CAE-BC5C-4D6D6A8294D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chief", "Chief\Chief.csproj", "{5A85FCAF-DAAC-4CAE-BC5C-4D6D6A8294D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChiefCore", "ChiefCore\ChiefCore.csproj", "{4D078273-78B7-4A5D-BD31-39FDD618968F}"
 EndProject

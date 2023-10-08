@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root"
+                xmlns="">
+        <xsd:element name="root" msdata:IsDataSet="true"></xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="WelcomeTitle" xml:space="preserve">
+    <value>欢迎使用 Chief</value>
+  </data>
+    <data name="WoolangButton" xml:space="preserve">
+    <value>Woolang 编译器</value>
+  </data>
+    <data name="BaoziButton" xml:space="preserve">
+    <value>Baozi 包管理器</value>
+  </data>
+    <data name="JoyECSButton" xml:space="preserve">
+    <value>JoyEngine 引擎</value>
+  </data>
+    <data name="ChiefConfig" xml:space="preserve">
+    <value>Chief 本体设置</value>
+  </data>
+    <data name="ModuleManageTitle" xml:space="preserve">
+    <value>管理</value>
+  </data>
+    <data name="ModuleManageSubtitle" xml:space="preserve">
+    <value>安装，编辑或卸载此设备上的</value>
+  </data>
+    <data name="ModifyButton" xml:space="preserve">
+    <value>模块设置</value>
+  </data>
+    <data name="InstallButton" xml:space="preserve">
+    <value>全新安装</value>
+  </data>
+</root>
