@@ -20,10 +20,11 @@ public class MainWindowViewModel : ViewModelBase
     };
 
     private UserControl _currentContent = new Views.Pages.Index();
-    private IPageTransition _transition = new CrossFade();
 
     private Color _themeColor = ThemeColors[Utils.ThemeConverter.PlatformThemeVar2AppThemeVar(Application.Current!
         .PlatformSettings!.GetColorValues().ThemeVariant)];
+
+    private IPageTransition _transition = new CrossFade();
 
     public MainWindowViewModel(ILocalizer loc)
     {
@@ -74,7 +75,7 @@ public class MainWindowViewModel : ViewModelBase
         where TV : UserControl, new()
     {
         Transition = transition ?? new CrossFade();
-        CurrentContent = new TV()
+        CurrentContent = new TV
         {
             DataContext = viewModel
         };

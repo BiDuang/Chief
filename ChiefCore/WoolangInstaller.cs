@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Setup.Configuration;
@@ -50,8 +51,7 @@ public static partial class WoolangInstaller
     public static async Task<List<WoolangCompilerInfo>> GetAllWoolangCompilerInfos()
     {
         var result = new List<WoolangCompilerInfo>();
-        var finder = string.Empty;
-        var woolang = string.Empty;
+        string finder, woolang;
         switch (Environment.OSVersion.Platform)
         {
             case PlatformID.Win32NT:
@@ -84,14 +84,29 @@ public static partial class WoolangInstaller
         woolangDirs.RemoveAll(x => !x.EndsWith(woolang));
         foreach (var copDir in woolangDirs)
         {
-            process = Process.Start(new ProcessStartInfo
+            try
             {
-                FileName = copDir,
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            });
-            var woolangInfo = (await process!.StandardOutput.ReadToEndAsync()).Split("\r\n").ToList();
+                process = Process.Start(new ProcessStartInfo
+                {
+                    FileName = copDir,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                });
+                var woolangInfo = RemoveColorCharsRegex().Replace(await process!.StandardOutput.ReadToEndAsync(), "")
+                    .Split("\r\n").ToList();
+                result.Add(new WoolangCompilerInfo
+                {
+                    BuildTime = Convert.ToDateTime(woolangInfo[3].Remove(0, 6), CultureInfo.InvariantCulture),
+                    Commit = woolangInfo[2].Remove(0, 8) != "untracked" ? woolangInfo[2].Remove(0, 8) : null,
+                    Path = copDir,
+                    Version = woolangInfo[1].Remove(0, 9)
+                });
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
         }
 
         return result;
@@ -106,7 +121,7 @@ public static partial class WoolangInstaller
 
     public class WoolangCompilerInfo
     {
-        public string? BuildTime = null;
+        public DateTime? BuildTime = null;
         public string? Commit = null;
         public string Path = string.Empty;
         public string Version = string.Empty;
