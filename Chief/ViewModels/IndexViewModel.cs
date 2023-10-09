@@ -1,5 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
+using Avalonia.Animation;
 using Chief.Models;
+using Chief.PageTransitions;
 using Chief.Views.Pages;
 using ReactiveUI;
 
@@ -9,8 +12,11 @@ public class IndexViewModel : ViewModelBase
 {
     public static ICommand GotoWoolangCommand => ReactiveCommand.Create(() =>
     {
-        MainWindowViewModel.Instance!.CurrentContent = new ModuleManage
-            { DataContext = new ModuleManageViewModel(ModuleSource.Woolang) };
+        // MainWindowViewModel.Instance!.CurrentContent = new ModuleManage
+        //     { DataContext = new ModuleManageViewModel(ModuleSource.Woolang) };
+        MainWindowViewModel.Instance!.Navigate<ModuleManage, ModuleManageViewModel>(
+            new ModuleManageViewModel(ModuleSource.Woolang),
+            transition: new DrillTransition());
     });
 
     public static ICommand GotoBaoziCommand => ReactiveCommand.Create(() =>

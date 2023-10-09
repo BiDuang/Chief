@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Threading;
 using Avalonia;
+using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Styling;
@@ -19,6 +20,7 @@ public class MainWindowViewModel : ViewModelBase
     };
 
     private UserControl _currentContent = new Views.Pages.Index();
+    private IPageTransition _transition = new CrossFade();
 
     private Color _themeColor = ThemeColors[Utils.ThemeConverter.PlatformThemeVar2AppThemeVar(Application.Current!
         .PlatformSettings!.GetColorValues().ThemeVariant)];
@@ -53,5 +55,28 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _currentContent;
         set => this.RaiseAndSetIfChanged(ref _currentContent, value);
+    }
+
+    public IPageTransition Transition
+    {
+        get => _transition;
+        set => this.RaiseAndSetIfChanged(ref _transition, value);
+    }
+
+    public void Navigate<TV, TM>(IPageTransition? transition = null)
+        where TV : UserControl, new()
+        where TM : new()
+    {
+        Navigate<TV, TM>(new TM(), transition);
+    }
+
+    public void Navigate<TV, TM>(TM viewModel, IPageTransition? transition = null)
+        where TV : UserControl, new()
+    {
+        Transition = transition ?? new CrossFade();
+        CurrentContent = new TV()
+        {
+            DataContext = viewModel
+        };
     }
 }

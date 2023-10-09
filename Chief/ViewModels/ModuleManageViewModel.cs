@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Chief.Models;
+using Chief.PageTransitions;
 using Index = Chief.Views.Pages.Index;
 
 namespace Chief.ViewModels;
@@ -13,7 +14,7 @@ public class ModuleManageViewModel : ViewModelBase
 
     public static ICommand GotoIndexCommand => ReactiveUI.ReactiveCommand.Create(() =>
     {
-        MainWindowViewModel.Instance!.CurrentContent = new Index();
+        MainWindowViewModel.Instance!.Navigate<Index, IndexViewModel>(new DrillTransition() { Backward = true });
     });
 
     public string SourceName =>

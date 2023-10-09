@@ -22,11 +22,7 @@
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         <Grid ColumnDefinitions="*,50*,*" RowDefinitions="2*,26*,2*">
-            <TransitioningContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentContent}">
-                <TransitioningContentControl.PageTransition>
-                    <CrossFade Duration="0:0:0.3" />
-                </TransitioningContentControl.PageTransition>
-            </TransitioningContentControl>
+            <TransitioningContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentContent}" PageTransition="{Binding Transition}"/>
         </Grid>
     </Panel>
 </Window>
