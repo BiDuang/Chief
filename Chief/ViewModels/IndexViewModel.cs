@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Input;
-using Avalonia.Animation;
+﻿using System.Windows.Input;
 using Chief.Models;
 using Chief.PageTransitions;
 using Chief.Views.Pages;
@@ -12,8 +10,6 @@ public class IndexViewModel : ViewModelBase
 {
     public static ICommand GotoWoolangCommand => ReactiveCommand.Create(() =>
     {
-        // MainWindowViewModel.Instance!.CurrentContent = new ModuleManage
-        //     { DataContext = new ModuleManageViewModel(ModuleSource.Woolang) };
         MainWindowViewModel.Instance!.Navigate<ModuleManage, ModuleManageViewModel>(
             new ModuleManageViewModel(ModuleSource.Woolang),
             transition: new DrillTransition());
@@ -21,13 +17,15 @@ public class IndexViewModel : ViewModelBase
 
     public static ICommand GotoBaoziCommand => ReactiveCommand.Create(() =>
     {
-        MainWindowViewModel.Instance!.CurrentContent = new ModuleManage
-            { DataContext = new ModuleManageViewModel(ModuleSource.Baozi) };
+        MainWindowViewModel.Instance!.Navigate<ModuleManage, ModuleManageViewModel>(
+            new ModuleManageViewModel(ModuleSource.Baozi),
+            transition: new DrillTransition());
     });
 
     public static ICommand GotoJoyEngineCommand => ReactiveCommand.Create(() =>
     {
-        MainWindowViewModel.Instance!.CurrentContent = new ModuleManage
-            { DataContext = new ModuleManageViewModel(ModuleSource.JoyEngine) };
+        MainWindowViewModel.Instance!.Navigate<ModuleManage, ModuleManageViewModel>(
+            new ModuleManageViewModel(ModuleSource.JoyEngine),
+            transition: new DrillTransition());
     });
 }

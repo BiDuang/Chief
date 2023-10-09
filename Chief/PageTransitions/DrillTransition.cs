@@ -10,7 +10,6 @@ using Avalonia.Styling;
 
 namespace Chief.PageTransitions;
 
-/*TODO: Fix issue #1(Animation issue)*/
 public class DrillTransition : IPageTransition
 {
     public bool Backward { get; set; }
