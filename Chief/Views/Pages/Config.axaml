@@ -24,7 +24,7 @@
         </Button>
         <TextBlock Grid.Column="2" Grid.Row="1" Text="{i18N:ReactiveUiLocalization ConfigTitle}" FontSize="30" />
         <Grid Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="3" ColumnDefinitions="1.5*,3*,0.5*,1.5*,3*"
-              RowDefinitions="*,2*,*,2*,*,2*,*,2*" ShowGridLines="True">
+              RowDefinitions="*,2*,*,2*,*,2*,*,2*">
             <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Classes="Title"
                        Text="{i18N:ReactiveUiLocalization ConfigA1}" />
             <ComboBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center"
