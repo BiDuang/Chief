@@ -44,11 +44,6 @@ public class DrillTransition : IPageTransition
 
         if (to != null)
         {
-            foreach (var child in to.GetVisualDescendants().OfType<Control>())
-            {
-                child.IsEnabled = false;
-            }
-
             to.IsVisible = true;
             animations.Add(Fade(true).RunAsync(to, cancellationToken));
             if (!Backward)
@@ -59,12 +54,6 @@ public class DrillTransition : IPageTransition
         }
 
         await Task.WhenAll(animations);
-
-        if (to != null)
-            foreach (var child in to.GetVisualDescendants().OfType<Control>())
-            {
-                child.IsEnabled = true;
-            }
 
         if (from != null && !cancellationToken.IsCancellationRequested)
         {
