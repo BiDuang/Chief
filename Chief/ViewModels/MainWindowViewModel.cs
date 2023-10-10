@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Threading;
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Platform;
 using Avalonia.Styling;
-using I18N.Avalonia.Interface;
+using Chief.Models;
+using Chief.Utils;
 using ReactiveUI;
 
 namespace Chief.ViewModels;
@@ -21,27 +21,27 @@ public class MainWindowViewModel : ViewModelBase
 
     private UserControl _currentContent = new Views.Pages.Index();
 
-    private Color _themeColor = ThemeColors[Utils.ThemeConverter.PlatformThemeVar2AppThemeVar(Application.Current!
-        .PlatformSettings!.GetColorValues().ThemeVariant)];
+    private ThemeVariant _currentTheme = ThemeConverter.ThemeMode2AppThemeVar(Cache.Config.Instance.AppTheme);
+
+    private Color _themeColor = ThemeColors[ThemeConverter.ThemeMode2AppThemeVar(Cache.Config.Instance!.AppTheme)];
 
     private IPageTransition _transition = new CrossFade();
 
-    public MainWindowViewModel(ILocalizer loc)
+    public MainWindowViewModel()
     {
+        if (Cache.Config.Instance!.AppTheme == ThemeMode.SyncWithSystem)
+            Application.Current!.PlatformSettings!.ColorValuesChanged += SystemThemeChangedEvent;
         Instance = this;
-        Application.Current!.PlatformSettings!.ColorValuesChanged += (_, _) =>
+    }
+
+    public ThemeVariant CurrentTheme
+    {
+        get => _currentTheme;
+        set
         {
-            var currentTheme = Utils.ThemeConverter.PlatformThemeVar2AppThemeVar(Application.Current.PlatformSettings!
-                .GetColorValues().ThemeVariant);
-            BaseColor = ThemeColors[currentTheme];
-        };
-        loc.Language = Thread.CurrentThread.CurrentCulture.Name switch
-        {
-            "en-US" => new CultureInfo("en-US"),
-            "zh-CN" => new CultureInfo("zh-CN"),
-            "ja-JP" => new CultureInfo("ja-JP"),
-            _ => new CultureInfo("en-US")
-        };
+            BaseColor = ThemeColors[value];
+            this.RaiseAndSetIfChanged(ref _currentTheme, value);
+        }
     }
 
     public Color BaseColor
@@ -79,5 +79,11 @@ public class MainWindowViewModel : ViewModelBase
         {
             DataContext = viewModel
         };
+    }
+
+    public void SystemThemeChangedEvent(object? o, PlatformColorValues values)
+    {
+        CurrentTheme = ThemeConverter.PlatformThemeVar2AppThemeVar(values.ThemeVariant);
+        BaseColor = ThemeColors[ThemeConverter.PlatformThemeVar2AppThemeVar(values.ThemeVariant)];
     }
 }

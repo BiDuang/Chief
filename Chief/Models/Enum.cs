@@ -6,3 +6,17 @@ public enum ModuleSource
     Baozi,
     JoyEngine
 }
+
+public enum ThemeMode
+{
+    Light,
+    Dark,
+    SyncWithSystem
+}
+
+public enum SupportedLanguage
+{
+    English,
+    Chinese,
+    Japanese
+}

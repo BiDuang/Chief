@@ -112,6 +112,11 @@ public static partial class WoolangInstaller
         return result;
     }
 
+    public static async Task<bool> BuildWoolangCompiler(string destDir)
+    {
+        return true;
+    }
+
     public class VisualStudioInfo
     {
         public string Path = string.Empty;

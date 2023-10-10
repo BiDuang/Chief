@@ -12,18 +12,20 @@
         TransparencyLevelHint="AcrylicBlur"
         Background="Transparent"
         ExtendClientAreaToDecorationsHint="True">
-
-    <Panel>
-        <ExperimentalAcrylicBorder x:Name="ExperimentalAcrylicBorder">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial
-                    BackgroundSource="Digger" TintOpacity="1" MaterialOpacity="0.65"
-                    TintColor="{Binding BaseColor}" />
-            </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>
-        <Grid ColumnDefinitions="*,50*,*" RowDefinitions="2*,26*,2*">
-            <TransitioningContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentContent}"
-                                         PageTransition="{Binding Transition}" />
-        </Grid>
-    </Panel>
+    
+    <ThemeVariantScope RequestedThemeVariant="{Binding CurrentTheme}">
+        <Panel>
+            <ExperimentalAcrylicBorder x:Name="ExperimentalAcrylicBorder">
+                <ExperimentalAcrylicBorder.Material>
+                    <ExperimentalAcrylicMaterial
+                        BackgroundSource="Digger" TintOpacity="1" MaterialOpacity="0.65"
+                        TintColor="{Binding BaseColor}" />
+                </ExperimentalAcrylicBorder.Material>
+            </ExperimentalAcrylicBorder>
+            <Grid ColumnDefinitions="*,50*,*" RowDefinitions="2*,26*,2*">
+                <TransitioningContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentContent}"
+                                             PageTransition="{Binding Transition}" />
+            </Grid>
+        </Panel>
+    </ThemeVariantScope>
 </Window>

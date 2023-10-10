@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Chief.i18N {
+namespace Chief.I18N {
     using System;
     
     
@@ -38,7 +38,7 @@ namespace Chief.i18N {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Chief.i18N.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Chief.I18N.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,9 +62,9 @@ namespace Chief.i18N {
         /// <summary>
         ///   Looks up a localized string similar to Baozi 包管理器.
         /// </summary>
-        internal static string BaoziButton {
+        internal static string Baozi {
             get {
-                return ResourceManager.GetString("BaoziButton", resourceCulture);
+                return ResourceManager.GetString("Baozi", resourceCulture);
             }
         }
         
@@ -74,6 +74,33 @@ namespace Chief.i18N {
         internal static string ChiefConfig {
             get {
                 return ResourceManager.GetString("ChiefConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 主题样式.
+        /// </summary>
+        internal static string ConfigA1 {
+            get {
+                return ResourceManager.GetString("ConfigA1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 语言设置 (Language).
+        /// </summary>
+        internal static string ConfigA2 {
+            get {
+                return ResourceManager.GetString("ConfigA2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 设置.
+        /// </summary>
+        internal static string ConfigTitle {
+            get {
+                return ResourceManager.GetString("ConfigTitle", resourceCulture);
             }
         }
         
@@ -89,9 +116,9 @@ namespace Chief.i18N {
         /// <summary>
         ///   Looks up a localized string similar to JoyEngine 引擎.
         /// </summary>
-        internal static string JoyECSButton {
+        internal static string JoyECS {
             get {
-                return ResourceManager.GetString("JoyECSButton", resourceCulture);
+                return ResourceManager.GetString("JoyECS", resourceCulture);
             }
         }
         
@@ -123,6 +150,15 @@ namespace Chief.i18N {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *: 目前，多语言支持仍在测试中，因此翻译会不完善或不准确，建议使用“简体中文”语言。.
+        /// </summary>
+        internal static string TranslateNotice {
+            get {
+                return ResourceManager.GetString("TranslateNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 欢迎使用 Chief.
         /// </summary>
         internal static string WelcomeTitle {
@@ -134,9 +170,9 @@ namespace Chief.i18N {
         /// <summary>
         ///   Looks up a localized string similar to Woolang 编译器.
         /// </summary>
-        internal static string WoolangButton {
+        internal static string Woolang {
             get {
-                return ResourceManager.GetString("WoolangButton", resourceCulture);
+                return ResourceManager.GetString("Woolang", resourceCulture);
             }
         }
     }

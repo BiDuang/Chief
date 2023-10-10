@@ -28,4 +28,10 @@ public class IndexViewModel : ViewModelBase
             new ModuleManageViewModel(ModuleSource.JoyEngine),
             transition: new DrillTransition());
     });
+
+    public static ICommand GotoConfigCommand => ReactiveCommand.Create(() =>
+    {
+        MainWindowViewModel.Instance!.Navigate<Config, ConfigViewModel>(
+            new ConfigViewModel(), transition: new DrillTransition());
+    });
 }

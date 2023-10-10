@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Chief.Utils;
 using Chief.ViewModels;
 using Chief.Views;
 using I18N.Avalonia;
@@ -9,17 +10,18 @@ using Splat;
 
 namespace Chief;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {
+        Cache.Config.LoadConfig();
         AvaloniaXamlLoader.Load(this);
     }
 
     public override void RegisterServices()
     {
         base.RegisterServices();
-        Locator.CurrentMutable.RegisterLazySingleton(() => new Localizer(i18N.Resource.ResourceManager),
+        Locator.CurrentMutable.RegisterLazySingleton(() => new Localizer(I18N.Resource.ResourceManager),
             typeof(ILocalizer));
     }
 
@@ -29,7 +31,7 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(Locator.Current.GetService<ILocalizer>()!),
+                DataContext = new MainWindowViewModel(),
             };
         }
 

@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Animation.Easings;
+using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Styling;
+using Avalonia.VisualTree;
+using Chief.Utils;
 
 namespace Chief.PageTransitions;
 
 public class DrillTransition : IPageTransition
 {
     public bool Backward { get; set; }
-
-    public TimeSpan Duration { get; set; } = TimeSpan.FromMilliseconds(300);
 
     public async Task Start(Visual? from, Visual? to, bool forward, CancellationToken cancellationToken)
     {
@@ -27,6 +29,11 @@ public class DrillTransition : IPageTransition
 
         if (from != null)
         {
+            foreach (var child in from.GetVisualDescendants().OfType<Control>())
+            {
+                child.IsEnabled = false;
+            }
+
             animations.Add(Fade(false).RunAsync(from, cancellationToken));
             if (Backward)
             {
@@ -37,6 +44,11 @@ public class DrillTransition : IPageTransition
 
         if (to != null)
         {
+            foreach (var child in to.GetVisualDescendants().OfType<Control>())
+            {
+                child.IsEnabled = false;
+            }
+
             to.IsVisible = true;
             animations.Add(Fade(true).RunAsync(to, cancellationToken));
             if (!Backward)
@@ -48,6 +60,12 @@ public class DrillTransition : IPageTransition
 
         await Task.WhenAll(animations);
 
+        if (to != null)
+            foreach (var child in to.GetVisualDescendants().OfType<Control>())
+            {
+                child.IsEnabled = true;
+            }
+
         if (from != null && !cancellationToken.IsCancellationRequested)
         {
             from.IsVisible = false;
@@ -57,7 +75,7 @@ public class DrillTransition : IPageTransition
     private Animation Fade(bool isOut) => new()
     {
         FillMode = FillMode.Forward,
-        Duration = Duration,
+        Duration = TimeSpan.FromMilliseconds(Cache.Config.Instance!.AnimationSpeed),
         Easing = new SineEaseIn(),
         Children =
         {
@@ -92,7 +110,7 @@ public class DrillTransition : IPageTransition
     {
         FillMode = FillMode.Forward,
         Easing = isOut ? new SineEaseOut() : new SineEaseIn(),
-        Duration = Duration,
+        Duration = TimeSpan.FromMilliseconds(Cache.Config.Instance!.AnimationSpeed),
         Children =
         {
             new KeyFrame

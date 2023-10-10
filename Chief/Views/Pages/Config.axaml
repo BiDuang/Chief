@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
+             xmlns:i18N="clr-namespace:I18N.Avalonia.ReactiveUi;assembly=I18N.Avalonia.ReactiveUi"
+             xmlns:vm="clr-namespace:Chief.ViewModels;assembly=Chief"
+             x:CompileBindings="False"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Chief.Views.Pages.Config">
+    <UserControl.DataContext>
+        <vm:ConfigViewModel />
+    </UserControl.DataContext>
+
+    <Grid ColumnDefinitions="2*,0.5*,25*,0.5*,5*,0.5*,5*" RowDefinitions="0.5*,3*,*,26*,2*">
+        <Grid.Styles>
+            <Style Selector="TextBlock.Title">
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+        </Grid.Styles>
+        <Button Grid.Column="0" Grid.Row="1" Command="{Binding GotoIndexCommand}" CornerRadius="100"
+                BorderThickness="2" BorderBrush="{DynamicResource ButtonBackground}" Background="Transparent">
+            <i:Icon Value="fa-solid fa-arrow-left" FontSize="24" />
+        </Button>
+        <TextBlock Grid.Column="2" Grid.Row="1" Text="{i18N:ReactiveUiLocalization ConfigTitle}" FontSize="30" />
+        <Grid Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="3" ColumnDefinitions="1.5*,3*,0.5*,1.5*,3*"
+              RowDefinitions="*,2*,*,2*,*,2*,*,2*" ShowGridLines="True">
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Classes="Title"
+                       Text="{i18N:ReactiveUiLocalization ConfigA1}" />
+            <ComboBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center"
+                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                      ItemsSource="{Binding Themes}" SelectedItem="{Binding CurrentTheme}" />
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Classes="Title"
+                       Text="{i18N:ReactiveUiLocalization ConfigA2}" />
+            <ComboBox Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"
+                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                      ItemsSource="{Binding Languages}" SelectedItem="{Binding CurrentLanguage}" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="{i18N:ReactiveUiLocalization TranslateNotice}" FontSize="12"
+                       TextWrapping="WrapWithOverflow" Margin="5" Foreground="Red" IsVisible="{Binding !IsChinese}" />
+        </Grid>
+    </Grid>
+</UserControl>

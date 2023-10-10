@@ -1,28 +1,21 @@
 ﻿using System;
-using System.Windows.Input;
+using Chief.I18N;
 using Chief.Models;
-using Chief.PageTransitions;
-using Index = Chief.Views.Pages.Index;
 
 namespace Chief.ViewModels;
 
-public class ModuleManageViewModel : ViewModelBase
+public class ModuleManageViewModel : PageViewModel
 {
     private readonly ModuleSource _source;
     public ModuleManageViewModel() => _source = ModuleSource.Woolang;
     public ModuleManageViewModel(ModuleSource source) => _source = source;
 
-    public static ICommand GotoIndexCommand => ReactiveUI.ReactiveCommand.Create(() =>
-    {
-        MainWindowViewModel.Instance!.Navigate<Index, IndexViewModel>(new DrillTransition() { Backward = true });
-    });
-
     public string SourceName =>
         _source switch
         {
-            ModuleSource.Woolang => "Woolang",
-            ModuleSource.Baozi => "Baozi",
-            ModuleSource.JoyEngine => "JoyEngine ECS",
+            ModuleSource.Woolang => Resource.Woolang,
+            ModuleSource.Baozi => Resource.Baozi,
+            ModuleSource.JoyEngine => Resource.JoyECS,
             _ => throw new ArgumentOutOfRangeException()
         };
 }

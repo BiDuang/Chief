@@ -19,7 +19,7 @@
             <Button Grid.Column="0" Command="{Binding  GotoWoolangCommand}">
                 <Grid>
                     <i:Icon Value="fa-solid fa-code" FontSize="60" VerticalAlignment="Center" />
-                    <TextBlock Text="{i18N:ReactiveUiLocalization WoolangButton}"
+                    <TextBlock Text="{i18N:ReactiveUiLocalization Woolang}"
                                VerticalAlignment="Bottom" TextAlignment="Center"
                                TextWrapping="WrapWithOverflow" />
                 </Grid>
@@ -27,19 +27,19 @@
             <Button Grid.Column="2" Command="{Binding GotoBaoziCommand}">
                 <Grid>
                     <i:Icon Value="fa-solid fa-box-open" FontSize="60" VerticalAlignment="Center" />
-                    <TextBlock Text="{i18N:ReactiveUiLocalization BaoziButton}" VerticalAlignment="Bottom"
+                    <TextBlock Text="{i18N:ReactiveUiLocalization Baozi}" VerticalAlignment="Bottom"
                                TextWrapping="WrapWithOverflow" TextAlignment="Center" />
                 </Grid>
             </Button>
             <Button Grid.Column="4" Command="{Binding GotoJoyEngineCommand}">
                 <Grid>
                     <i:Icon Value="fa-solid fa-gamepad" FontSize="60" VerticalAlignment="Center" />
-                    <TextBlock Text="{i18N:ReactiveUiLocalization JoyECSButton}"
+                    <TextBlock Text="{i18N:ReactiveUiLocalization JoyECS}"
                                VerticalAlignment="Bottom" TextAlignment="Center"
                                TextWrapping="WrapWithOverflow" />
                 </Grid>
             </Button>
-            <Button Grid.Column="6">
+            <Button Grid.Column="6" Command="{Binding GotoConfigCommand}">
                 <Grid>
                     <i:Icon Value="fa-solid fa-gear" FontSize="50" Margin="5" VerticalAlignment="Center" />
                     <TextBlock Text="{i18N:ReactiveUiLocalization ChiefConfig}" VerticalAlignment="Bottom"
