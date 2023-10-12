@@ -12,31 +12,49 @@
         <vm:ConfigViewModel />
     </UserControl.DataContext>
 
-    <Grid ColumnDefinitions="2*,0.5*,25*,0.5*,5*,0.5*,5*" RowDefinitions="0.5*,3*,*,26*,2*">
+    <Grid ColumnDefinitions="2*,30.5*,0.5*,5*" RowDefinitions="0.5*,3*,*,26*,2.5*" ShowGridLines="True">
         <Grid.Styles>
             <Style Selector="TextBlock.Title">
                 <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
+            <Style Selector="Button.WarningButton">
+                <Setter Property="Background" Value="#CC4D11" />
+            </Style>
+            <Style Selector="Button.WarningButton:pointerover">
+                <Setter Property="Background" Value="#EDA482" />
+            </Style>
+            <Style Selector="Button.WarningButton:pressed">
+                <Setter Property="Background" Value="#932107" />
+            </Style>
         </Grid.Styles>
-        <Button Grid.Column="0" Grid.Row="1" Command="{Binding GotoIndexCommand}" CornerRadius="100"
-                BorderThickness="2" BorderBrush="{DynamicResource ButtonBackground}" Background="Transparent">
-            <i:Icon Value="fa-solid fa-arrow-left" FontSize="24" />
+        <Button Grid.Column="0" Grid.Row="1" Command="{Binding GotoIndexCommand}" CornerRadius="10"
+                Background="Transparent">
+            <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                <i:Icon Value="fa-solid fa-arrow-left" FontSize="24" />
+            </Viewbox>
         </Button>
-        <TextBlock Grid.Column="2" Grid.Row="1" Text="{i18N:ReactiveUiLocalization ConfigTitle}" FontSize="30" />
-        <Grid Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="3" ColumnDefinitions="1.5*,3*,0.5*,1.5*,3*"
-              RowDefinitions="*,2*,*,2*,*,2*,*,2*">
-            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Classes="Title"
-                       Text="{i18N:ReactiveUiLocalization ConfigA1}" />
+        <Viewbox Grid.Column="1" Grid.Row="1" Margin="2">
+            <TextBlock Text="{i18N:ReactiveUiLocalization ConfigTitle}" />
+        </Viewbox>
+        <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3" ColumnDefinitions="1.5*,3*,0.5*,1.5*,3*"
+              RowDefinitions="*,2.5*,*,2.5*,*,2.5*,*,2.5*">
+            <Viewbox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Classes="ReElem">
+                <TextBlock Classes="Title" Text="{i18N:ReactiveUiLocalization ConfigA1}" />
+            </Viewbox>
             <ComboBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center"
                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                       ItemsSource="{Binding Themes}" SelectedItem="{Binding CurrentTheme}" />
-            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Classes="Title"
-                       Text="{i18N:ReactiveUiLocalization ConfigA2}" />
+            <Viewbox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Classes="ReElem">
+                <TextBlock Classes="Title" Text="{i18N:ReactiveUiLocalization ConfigA2}" />
+            </Viewbox>
             <ComboBox Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"
                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                       ItemsSource="{Binding Languages}" SelectedItem="{Binding CurrentLanguage}" />
-            <TextBlock Grid.Column="1" Grid.Row="3" Text="{i18N:ReactiveUiLocalization TranslateNotice}" FontSize="12"
-                       TextWrapping="WrapWithOverflow" Margin="5" Foreground="Red" IsVisible="{Binding !IsChinese}" />
+            <Viewbox Grid.Column="1" Grid.Row="3" Margin="10" Classes="ReElem">
+                <TextBlock Text="{i18N:ReactiveUiLocalization TranslateNotice}" Foreground="Red"
+                           IsVisible="{Binding !IsChinese}" />
+            </Viewbox>
         </Grid>
+        <Button Grid.Column="3" Grid.Row="4" Content="" Classes="WarningButton" />
     </Grid>
 </UserControl>

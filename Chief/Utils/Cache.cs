@@ -80,6 +80,8 @@ public class Cache
         }
 
         [JsonProperty("Animation")] public double AnimationSpeed { get; set; } = 500;
+
+        public CultureInfo GetAppCultureInfo() => new(AppLanguage);
         public static void LoadConfig() => Instance = new Config();
 
         public bool Save()

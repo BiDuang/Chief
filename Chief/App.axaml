@@ -11,8 +11,12 @@
 
     <Application.Styles>
         <FluentTheme />
-        <Style Selector="Control">
+        <Style Selector="Visual">
             <Setter Property="Opacity" Value="0.8" />
+        </Style>
+        <Style Selector="Viewbox.ReElem">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Stretch" Value="Uniform" />
         </Style>
         <Style Selector="Button">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -22,7 +26,7 @@
         <Style Selector="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
-        <Style Selector="Button.WarningButton" />
+        
         <Style Selector="Button.SemiButton">
             <Setter Property="Opacity" Value="0.7" />
         </Style>

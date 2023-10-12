@@ -1,6 +1,7 @@
 ﻿using System;
 using Chief.I18N;
 using Chief.Models;
+using Chief.Utils;
 
 namespace Chief.ViewModels;
 
@@ -13,9 +14,12 @@ public class ModuleManageViewModel : PageViewModel
     public string SourceName =>
         _source switch
         {
-            ModuleSource.Woolang => Resource.Woolang,
-            ModuleSource.Baozi => Resource.Baozi,
-            ModuleSource.JoyEngine => Resource.JoyECS,
+            ModuleSource.Woolang =>
+                Resource.ResourceManager.GetString("Woolang", Cache.Config.Instance!.GetAppCultureInfo())!,
+            ModuleSource.Baozi => Resource.ResourceManager.GetString("Baozi",
+                Cache.Config.Instance!.GetAppCultureInfo())!,
+            ModuleSource.JoyEngine => Resource.ResourceManager.GetString("JoyECS",
+                Cache.Config.Instance!.GetAppCultureInfo())!,
             _ => throw new ArgumentOutOfRangeException()
         };
 }

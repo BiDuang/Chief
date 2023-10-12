@@ -12,26 +12,31 @@
         <vm:ModuleManageViewModel />
     </Design.DataContext>
 
-    <Grid ColumnDefinitions="2*,0.5*,25*,0.5*,5*,0.5*,5*" RowDefinitions="0.5*,3*,*,3*,*,22*,*,2*">
-        <Button Grid.Column="0" Grid.Row="1" Command="{Binding GotoIndexCommand}" CornerRadius="100"
-                BorderThickness="2" BorderBrush="{DynamicResource ButtonBackground}" Background="Transparent">
-            <i:Icon Value="fa-solid fa-arrow-left" FontSize="24" />
+    <Grid ColumnDefinitions="2*,25*,0.5*,5*,0.5*,5*" RowDefinitions="0.5*,3*,*,3*,*,22*,*,2.5*">
+        <Button Grid.Column="0" Grid.Row="1" Command="{Binding GotoIndexCommand}" CornerRadius="10"
+                Background="Transparent">
+            <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Classes="ReElem">
+                <i:Icon Value="fa-solid fa-arrow-left" FontSize="24" />
+            </Viewbox>
         </Button>
-        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="{i18N:ReactiveUiLocalization ModuleManageTitle}" FontSize="30"
-                       VerticalAlignment="Center" />
-            <TextBlock Margin="10,0,0,0" Text="{Binding SourceName}" VerticalAlignment="Center" FontSize="30" />
-        </StackPanel>
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="3" Orientation="Horizontal">
-            <TextBlock
-                Text="{i18N:ReactiveUiLocalization ModuleManageSubtitle}"
-                VerticalAlignment="Center" />
-            <TextBlock Margin="3,0,0,0" Text="{Binding SourceName}" VerticalAlignment="Center" />
-        </StackPanel>
-        <ListBox Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="5" Background="Gray" />
-        <Button Grid.Column="4" Grid.Row="7" Content="{i18N:ReactiveUiLocalization ModifyButton}"
+        <Viewbox Grid.Column="1" Grid.Row="1" Classes="ReElem">
+            <StackPanel Orientation="Horizontal" Margin="2">
+                <TextBlock Text="{i18N:ReactiveUiLocalization ModuleManageTitle}" />
+                <TextBlock Text=" " />
+                <TextBlock Text="{Binding SourceName}" />
+            </StackPanel>
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="3" Classes="ReElem">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="{i18N:ReactiveUiLocalization ModuleManageSubtitle}" />
+                <TextBlock Text=" " />
+                <TextBlock Text="{Binding SourceName}" />
+            </StackPanel>
+        </Viewbox>
+        <ListBox Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="5" Background="Gray" />
+        <Button Grid.Column="3" Grid.Row="7" Content="{i18N:ReactiveUiLocalization ModifyButton}"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Button Grid.Column="6" Grid.Row="7" Content="{i18N:ReactiveUiLocalization InstallButton}"
+        <Button Grid.Column="5" Grid.Row="7" Content="{i18N:ReactiveUiLocalization InstallButton}"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
     </Grid>
 </UserControl>

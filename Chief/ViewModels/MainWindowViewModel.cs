@@ -21,9 +21,9 @@ public class MainWindowViewModel : ViewModelBase
 
     private UserControl _currentContent = new Views.Pages.Index();
 
-    private ThemeVariant _currentTheme = ThemeConverter.ThemeMode2AppThemeVar(Cache.Config.Instance.AppTheme);
+    private ThemeVariant _currentTheme = ThemeConverter.ThemeMode2AppThemeVar(Cache.Config.Instance!.AppTheme);
 
-    private Color _themeColor = ThemeColors[ThemeConverter.ThemeMode2AppThemeVar(Cache.Config.Instance!.AppTheme)];
+    private Color _themeColor = ThemeColors[ThemeConverter.ThemeMode2AppThemeVar(Cache.Config.Instance.AppTheme)];
 
     private IPageTransition _transition = new CrossFade();
 
