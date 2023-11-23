@@ -8,11 +8,11 @@ on:
 
 jobs:
   test:
-    name: Test on ${{ matrix.os }} .NET 8.0
+    name: Test on ${{ matrix.os }} .NET ${{ matrix.dotnet_version }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        dotnet_versions: ['7','8']
+        dotnet_version: ['7','8']
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - uses: actions/setup-dotnet@v3.2.0
