@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:i="https://github.com/projektanker/icons.avalonia"
+             xmlns:ic="using:FluentIcons.Avalonia"
              xmlns:i18N="clr-namespace:I18N.Avalonia.ReactiveUi;assembly=I18N.Avalonia.ReactiveUi"
              xmlns:vm="clr-namespace:Chief.ViewModels;assembly=Chief"
              x:CompileBindings="False"
@@ -20,17 +20,17 @@
             <Style Selector="Button.WarningButton">
                 <Setter Property="Background" Value="#CC4D11" />
             </Style>
-            <Style Selector="Button.WarningButton:pointerover">
+            <Style Selector="Button.WarningButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
                 <Setter Property="Background" Value="#EDA482" />
             </Style>
-            <Style Selector="Button.WarningButton:pressed">
+            <Style Selector="Button.WarningButton:pressed /template/ ContentPresenter#PART_ContentPresenter">
                 <Setter Property="Background" Value="#932107" />
             </Style>
         </Grid.Styles>
         <Button Grid.Column="0" Grid.Row="1" Command="{Binding GotoIndexCommand}" CornerRadius="10"
                 Background="Transparent">
             <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                <i:Icon Value="fa-solid fa-arrow-left" FontSize="24" />
+                <ic:SymbolIcon Symbol="ChevronLeft" FontSize="24"/>
             </Viewbox>
         </Button>
         <Viewbox Grid.Column="1" Grid.Row="1" Margin="2">

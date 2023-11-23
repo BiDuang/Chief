@@ -16,7 +16,7 @@ namespace Chief.PageTransitions;
 
 public class DrillTransition : IPageTransition
 {
-    public bool Backward { get; set; }
+    public bool Backward { get; init; }
 
     public async Task Start(Visual? from, Visual? to, bool forward, CancellationToken cancellationToken)
     {

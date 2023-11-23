@@ -93,9 +93,9 @@ public class Cache
                 var json = JsonConvert.SerializeObject(this);
                 File.WriteAllText(ConfigDir, json);
             }
-            catch
+            catch (Exception e)
             {
-                //TODO: Exception handling
+                Debug.WriteLine(e);
                 return false;
             }
 

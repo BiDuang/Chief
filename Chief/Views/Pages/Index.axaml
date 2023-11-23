@@ -2,9 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:i18N="clr-namespace:I18N.Avalonia.ReactiveUi;assembly=I18N.Avalonia.ReactiveUi"
              xmlns:vm="clr-namespace:Chief.ViewModels;assembly=Chief"
+             xmlns:ic="using:FluentIcons.Avalonia"
              x:CompileBindings="False"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Chief.Views.Pages.Index">
@@ -21,7 +21,7 @@
             <Button Grid.Column="0" Command="{Binding  GotoWoolangCommand}">
                 <Grid>
                     <Viewbox Classes="ReElem" Margin="30">
-                        <i:Icon Value="fa-solid fa-code" Margin="5" />
+                        <ic:SymbolIcon Symbol="Code" Margin="5" />
                     </Viewbox>
                     <Viewbox Stretch="Uniform" VerticalAlignment="Bottom" Margin="5">
                         <TextBlock Text="{i18N:ReactiveUiLocalization Woolang}" TextAlignment="Center" />
@@ -32,7 +32,7 @@
             <Button Grid.Column="2" Command="{Binding GotoBaoziCommand}">
                 <Grid>
                     <Viewbox Stretch="Uniform" VerticalAlignment="Center" Margin="30">
-                        <i:Icon Value="fa-solid fa-box-open" Margin="5" />
+                        <ic:SymbolIcon Symbol="BoxToolbox" Margin="5" />
                     </Viewbox>
                     <Viewbox Stretch="Uniform" VerticalAlignment="Bottom" Margin="5">
                         <TextBlock Text="{i18N:ReactiveUiLocalization Baozi}" TextAlignment="Center" />
@@ -42,7 +42,7 @@
             <Button Grid.Column="4" Command="{Binding GotoJoyEngineCommand}">
                 <Grid>
                     <Viewbox Stretch="Uniform" VerticalAlignment="Center" Margin="30">
-                        <i:Icon Value="fa-solid fa-gamepad" Margin="5" />
+                        <ic:SymbolIcon Symbol="Engine" Margin="5" />
                     </Viewbox>
                     <Viewbox Stretch="Uniform" VerticalAlignment="Bottom" Margin="5">
                         <TextBlock Text="{i18N:ReactiveUiLocalization JoyECS}" TextAlignment="Center" />
@@ -52,7 +52,7 @@
             <Button Grid.Column="6" Command="{Binding GotoConfigCommand}">
                 <Grid>
                     <Viewbox Stretch="Uniform" VerticalAlignment="Center" Margin="30">
-                        <i:Icon Value="fa-solid fa-gear" Margin="5" />
+                        <ic:SymbolIcon Symbol="Settings" Margin="5" />
                     </Viewbox>
                     <Viewbox Stretch="Uniform" VerticalAlignment="Bottom" Margin="5">
                         <TextBlock Text="{i18N:ReactiveUiLocalization ChiefConfig}" TextAlignment="Center" />

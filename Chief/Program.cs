@@ -2,8 +2,6 @@
 using Avalonia;
 using Avalonia.Media;
 using Avalonia.ReactiveUI;
-using Projektanker.Icons.Avalonia;
-using Projektanker.Icons.Avalonia.FontAwesome;
 
 namespace Chief;
 
@@ -19,7 +17,6 @@ class Program
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
     {
-        IconProvider.Current.Register<FontAwesomeIconProvider>();
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .With(new FontManagerOptions

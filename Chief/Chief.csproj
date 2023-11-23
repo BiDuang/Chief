@@ -15,16 +15,16 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.4"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.4"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.4"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.4"/>
+        <PackageReference Include="Avalonia" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.5"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.4"/>
-        <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.4"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5"/>
         <PackageReference Include="CustomMessageBox.Avalonia" Version="11.0.0.2"/>
+        <PackageReference Include="FluentIcons.Avalonia" Version="1.1.223"/>
         <PackageReference Include="I18N.Avalonia.ReactiveUi" Version="1.0.1"/>
-        <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="8.2.0"/>
     </ItemGroup>
 
 

@@ -150,7 +150,16 @@ namespace Chief.I18N {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to *: 目前，多语言支持仍在测试中，因此翻译会不完善或不准确，建议使用“简体中文”语言。.
+        ///   Looks up a localized string similar to 重置所有设置.
+        /// </summary>
+        internal static string ResetConfig {
+            get {
+                return ResourceManager.GetString("ResetConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 当前多语言支持不完善，请使用“简体中文”语言。.
         /// </summary>
         internal static string TranslateNotice {
             get {

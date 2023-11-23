@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:i="https://github.com/projektanker/icons.avalonia"
+             xmlns:ic="using:FluentIcons.Avalonia"
              xmlns:i18N="clr-namespace:I18N.Avalonia.ReactiveUi;assembly=I18N.Avalonia.ReactiveUi"
              xmlns:vm="clr-namespace:Chief.ViewModels;assembly=Chief"
              x:Class="Chief.Views.Pages.ModuleManage"
@@ -16,7 +16,7 @@
         <Button Grid.Column="0" Grid.Row="1" Command="{Binding GotoIndexCommand}" CornerRadius="10"
                 Background="Transparent">
             <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Classes="ReElem">
-                <i:Icon Value="fa-solid fa-arrow-left" FontSize="24" />
+                <ic:SymbolIcon Symbol="ChevronLeft" FontSize="24"/>
             </Viewbox>
         </Button>
         <Viewbox Grid.Column="1" Grid.Row="1" Classes="ReElem">

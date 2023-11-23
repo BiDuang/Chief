@@ -37,7 +37,7 @@ public class ConfigViewModel : PageViewModel
                     MainWindowViewModel.Instance!.SystemThemeChangedEvent;
 
             Cache.Config.Instance!.AppTheme = value;
-            MainWindowViewModel.Instance!.CurrentTheme = ThemeConverter.ThemeMode2AppThemeVar(value);
+            MainWindowViewModel.Instance.CurrentTheme = ThemeConverter.ThemeMode2AppThemeVar(value);
             Cache.Config.Instance.Save();
         }
     }
