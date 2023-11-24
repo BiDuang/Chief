@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }} .NET ${{ matrix.dotnet_version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        dotnet_version: ['7','8']
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    steps:
+      - uses: actions/setup-dotnet@v3.2.0
+        with:
+          dotnet-version: ${{ matrix.dotnet_versions }}
+      - uses: actions/checkout@v4      
+      - name: Restore packages
+        run: dotnet restore    
+      - name: Test
+        run: dotnet test -c Release -f net8.0 --no-restore
