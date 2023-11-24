@@ -1,20 +1,41 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
+using LibGit2Sharp;
+using LibGit2Sharp.Handlers;
+using Medallion.Shell;
 using Microsoft.VisualStudio.Setup.Configuration;
 
 namespace ChiefCore;
 
-public static partial class WoolangInstaller
+public record VisualStudioInfo
+{
+    public required string Path;
+    public InstanceState State = InstanceState.None;
+    public required string Version;
+}
+
+public record WoolangCompilerInfo
+{
+    public DateTime? BuildTime;
+    public string? Commit;
+    public required string Path;
+    public required string Version;
+}
+
+public static partial class WoolangInstallerExtensions
 {
     [GeneratedRegex(@"\x1B\[[0-9;]*[mK]")]
     private static partial Regex RemoveColorCharsRegex();
 
-    public static List<VisualStudioInfo> GetAllVisualStudioInfos()
+    public static List<VisualStudioInfo>? GetAllVisualStudioInfos()
     {
-        var result = new List<VisualStudioInfo>();
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            return null;
 
+        var result = new List<VisualStudioInfo>();
         try
         {
             var query = new SetupConfiguration();
@@ -48,29 +69,23 @@ public static partial class WoolangInstaller
         return result;
     }
 
-    public static async Task<List<WoolangCompilerInfo>> GetAllWoolangCompilerInfos()
+    public static async Task<List<WoolangCompilerInfo>?> GetAllWoolangCompilerInfos()
     {
         var result = new List<WoolangCompilerInfo>();
         string finder, woolang;
-        switch (Environment.OSVersion.Platform)
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            case PlatformID.Win32NT:
-                finder = "where.exe";
-                woolang = "woodriver.exe";
-                break;
-            case PlatformID.Unix:
-                finder = "which";
-                woolang = "woodriver";
-                break;
-            case PlatformID.Win32S:
-            case PlatformID.Win32Windows:
-            case PlatformID.WinCE:
-            case PlatformID.Xbox:
-            case PlatformID.MacOSX:
-            case PlatformID.Other:
-            default:
-                throw new PlatformNotSupportedException("This Platform is not supported.");
+            finder = "where";
+            woolang = "woodriver.exe";
         }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            finder = "which";
+            woolang = "woodriver";
+        }
+        else return null;
+
 
         var process = Process.Start(new ProcessStartInfo
         {
@@ -111,24 +126,98 @@ public static partial class WoolangInstaller
 
         return result;
     }
+}
 
-    public static async Task<bool> BuildWoolangCompiler(string destDir)
+public class WoolangInstaller(string cachePath, ICollection<string> outputPipe,
+    VisualStudioInfo? visualStudioInfo = null)
+{
+    public ProgressHandler? ProgressEvent { get; set; }
+
+    public async Task<bool> BuildWoolangCompiler()
     {
+        if (Directory.Exists(cachePath) && Directory.EnumerateFileSystemEntries(cachePath).Any())
+            return false;
+
+        var repoGitPath = Repository.Clone("https://git.cinogama.net/cinogamaproject/woolang.git", cachePath,
+            new CloneOptions
+            {
+                BranchName = "release",
+                Checkout = true,
+                RecurseSubmodules = true,
+                OnProgress = ProgressEvent
+            });
+        var repo = new Repository(repoGitPath);
+        await File.WriteAllTextAsync(Path.Combine(cachePath, "src", "wo_info.hpp"), $"\"{repo.Commits.First().Sha}\"");
+
+        Directory.CreateDirectory(Path.Combine(cachePath, "build"));
+
+        var cmd = new Shell(opts => opts
+            .WorkingDirectory(Path.Combine(cachePath, "build")));
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            if (visualStudioInfo is null) return false;
+            if (RuntimeInformation.OSArchitecture is Architecture.X64 or Architecture.X86 or Architecture.Arm64)
+                await cmd.Run(Path.Combine(visualStudioInfo.Path,
+                            "Common7", "IDE", "CommonExtensions", "Microsoft", "CMake", "CMake", "bin", "cmake.exe"),
+                        cachePath, "-DWO_MAKE_OUTPUT_IN_SAME_PATH=ON", "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO")
+                    .RedirectTo(outputPipe)
+                    .RedirectStandardErrorTo(outputPipe).Task;
+            else
+                await cmd.Run(Path.Combine(visualStudioInfo.Path,
+                            "Common7", "IDE", "CommonExtensions", "Microsoft", "CMake", "CMake", "bin", "cmake.exe"),
+                        cachePath, "-DWO_MAKE_OUTPUT_IN_SAME_PATH=ON", "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO",
+                        "-DWO_SUPPORT_ASMJIT=OFF") // disable asmjit
+                    .RedirectTo(outputPipe)
+                    .RedirectStandardErrorTo(outputPipe).Task;
+
+            await cmd.Run(Path.Combine(visualStudioInfo.Path, "MSBuild", "Current", "Bin", "MSBuild.exe"),
+                    Path.Combine(cachePath, "build", "driver", "woodriver.vcxproj"), "/p:Configuration=Release",
+                    "-maxCpuCount", "-m")
+                .RedirectTo(outputPipe)
+                .RedirectStandardErrorTo(outputPipe).Task;
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            if (RuntimeInformation.OSArchitecture is Architecture.X64 or Architecture.X86 or Architecture.Arm64)
+                await cmd.Run("cmake", cachePath, "-DWO_MAKE_OUTPUT_IN_SAME_PATH=ON",
+                        "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO")
+                    .RedirectTo(outputPipe)
+                    .RedirectStandardErrorTo(outputPipe).Task;
+            else
+                await cmd.Run("cmake", cachePath, "-DWO_MAKE_OUTPUT_IN_SAME_PATH=ON",
+                        "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO",
+                        "-DWO_SUPPORT_ASMJIT=OFF") // disable asmjit
+                    .RedirectTo(outputPipe)
+                    .RedirectStandardErrorTo(outputPipe).Task;
+
+            await cmd.Run("make", "-C", Path.Combine(cachePath, "build"), "-j")
+                .RedirectTo(outputPipe)
+                .RedirectStandardErrorTo(outputPipe).Task;
+        }
+
         return true;
     }
 
-    public class VisualStudioInfo
+    public int InstallWoolangCompiler(string installPath, bool writeEnv = true)
     {
-        public string Path = string.Empty;
-        public InstanceState State = InstanceState.None;
-        public string Version = string.Empty;
-    }
+        var woodriver = Path.Combine(cachePath, "build", "Release", "woodriver.exe");
+        var libwooExt = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dll" : "so";
+        var libwoo = Path.Combine(cachePath, "build", "Release", $"libwoo.{libwooExt}");
+        if (!File.Exists(woodriver) || !File.Exists(libwoo)) return 4;
+        Directory.CreateDirectory(installPath);
+        File.Copy(woodriver, Path.Combine(installPath, "woodriver.exe"), true);
+        File.Copy(libwoo, Path.Combine(installPath, $"libwoo.{libwooExt}"), true);
+        if (writeEnv)
+        {
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                return 1;
+            var envPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User);
+            var sb = new StringBuilder(envPath);
+            sb.Append(';');
+            sb.Append(installPath);
+            Environment.SetEnvironmentVariable("PATH", sb.ToString(), EnvironmentVariableTarget.User);
+        }
 
-    public class WoolangCompilerInfo
-    {
-        public DateTime? BuildTime = null;
-        public string? Commit = null;
-        public string Path = string.Empty;
-        public string Version = string.Empty;
+        return 0;
     }
 }
