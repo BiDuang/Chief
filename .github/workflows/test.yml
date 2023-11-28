@@ -21,4 +21,4 @@ jobs:
       - name: Restore packages
         run: dotnet restore
       - name: Build Test
-        run: dotnet build -c Release -f net8.0 --no-restore
+        run: dotnet build -c Release --no-restore
