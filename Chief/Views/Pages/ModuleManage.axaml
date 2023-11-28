@@ -12,31 +12,47 @@
         <vm:ModuleManageViewModel />
     </Design.DataContext>
 
-    <Grid ColumnDefinitions="2*,25*,0.5*,5*,0.5*,5*" RowDefinitions="0.5*,3*,*,3*,*,22*,*,2.5*">
-        <Button Grid.Column="0" Grid.Row="1" Command="{Binding GotoIndexCommand}" CornerRadius="10"
-                Background="Transparent">
-            <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Classes="ReElem">
-                <ic:SymbolIcon Symbol="ChevronLeft" FontSize="24"/>
+    <Grid RowDefinitions="0.5*,3*,*,3*,*,22*,*,2.5*">
+        <Grid Grid.Row="1" ColumnDefinitions="2*,35*">
+            <Button Grid.Column="0" Command="{Binding GotoIndexCommand}" CornerRadius="10"
+                    Background="Transparent">
+                <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Classes="ReElem">
+                    <ic:SymbolIcon Symbol="ChevronLeft" FontSize="24" />
+                </Viewbox>
+            </Button>
+
+            <Viewbox Grid.Column="1" Classes="ReElem">
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <TextBlock Text="{i18N:ReactiveUiLocalization ModuleManageTitle}" />
+                    <TextBlock Text="{Binding SourceName}" />
+                </StackPanel>
             </Viewbox>
-        </Button>
-        <Viewbox Grid.Column="1" Grid.Row="1" Classes="ReElem">
-            <StackPanel Orientation="Horizontal" Margin="2">
-                <TextBlock Text="{i18N:ReactiveUiLocalization ModuleManageTitle}" />
-                <TextBlock Text=" " />
-                <TextBlock Text="{Binding SourceName}" />
-            </StackPanel>
-        </Viewbox>
-        <Viewbox Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="3" Classes="ReElem">
+        </Grid>
+
+        <Viewbox Grid.Row="3" Classes="ReElem">
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="{i18N:ReactiveUiLocalization ModuleManageSubtitle}" />
-                <TextBlock Text=" " />
                 <TextBlock Text="{Binding SourceName}" />
             </StackPanel>
         </Viewbox>
-        <ListBox Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="5" Background="Gray" />
-        <Button Grid.Column="3" Grid.Row="7" Content="{i18N:ReactiveUiLocalization ModifyButton}"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Button Grid.Column="5" Grid.Row="7" Content="{i18N:ReactiveUiLocalization InstallButton}"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+
+        <ListBox Grid.Column="0" Grid.Row="5" Background="Gray" CornerRadius="5" />
+
+        <Grid Grid.Row="7" ColumnDefinitions="30*,*,5*,*,5*">
+            <Button Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Grid ColumnDefinitions="*,3*,*">
+                    <Viewbox Grid.Column="1">
+                        <TextBlock Text="{i18N:ReactiveUiLocalization ModifyButton}" />
+                    </Viewbox>
+                </Grid>
+            </Button>
+            <Button Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Grid ColumnDefinitions="*,3*,*">
+                    <Viewbox Grid.Column="1">
+                        <TextBlock Text="{i18N:ReactiveUiLocalization InstallButton}" />
+                    </Viewbox>
+                </Grid>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

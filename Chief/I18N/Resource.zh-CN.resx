@@ -126,7 +126,7 @@
     <value>Baozi 包管理器</value>
   </data>
   <data name="ChiefConfig" xml:space="preserve">
-    <value>Chief 本体设置</value>
+    <value>Chief 程序设置</value>
   </data>
   <data name="ConfigA1" xml:space="preserve">
     <value>主题样式</value>
@@ -140,6 +140,15 @@
   <data name="InstallButton" xml:space="preserve">
     <value>全新安装</value>
   </data>
+    <data name="InstallStage1" xml:space="preserve">
+    <value>选择安装方式</value>
+  </data>
+    <data name="InstallStage2" xml:space="preserve">
+    <value>获取程序资源</value>
+  </data>
+    <data name="InstallStage3" xml:space="preserve">
+    <value>编译 </value>
+  </data>
   <data name="JoyECS" xml:space="preserve">
     <value>JoyEngine 引擎</value>
   </data>
@@ -147,10 +156,10 @@
     <value>模块设置</value>
   </data>
   <data name="ModuleManageSubtitle" xml:space="preserve">
-    <value>安装，编辑或卸载此机器上的</value>
+    <value>安装，编辑或卸载此设备上的 </value>
   </data>
   <data name="ModuleManageTitle" xml:space="preserve">
-    <value>管理</value>
+    <value>管理 </value>
   </data>
     <data name="ResetConfig" xml:space="preserve">
     <value>重置所有设置</value>

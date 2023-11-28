@@ -1,11 +1,12 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.Media;
+using Avalonia.Media.Fonts;
 using Avalonia.ReactiveUI;
 
 namespace Chief;
 
-class Program
+internal static class Program
 {
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
@@ -15,18 +16,20 @@ class Program
         .StartWithClassicDesktopLifetime(args);
 
     // Avalonia configuration, don't remove; also used by visual designer.
-    public static AppBuilder BuildAvaloniaApp()
+    private static AppBuilder BuildAvaloniaApp()
     {
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()
+            .ConfigureFonts(fm => fm.AddFontCollection(
+                new EmbeddedFontCollection(
+                    new Uri("fonts:HarmonyOS_Sans_SC", UriKind.Absolute),
+                    new Uri("avares://Chief/Assets/Fonts", UriKind.Absolute))))
             .With(new FontManagerOptions
             {
-                FontFallbacks = new[]
+                DefaultFamilyName = "fonts:HarmonyOS_Sans_SC#HarmonyOS Sans SC",
+                FontFallbacks = new FontFallback[]
                 {
-                    new FontFallback
-                    {
-                        FontFamily = new FontFamily("avares://Chief/Assets/MicrosoftYaHei.ttf#Microsoft YaHei")
-                    }
+                    new() { FontFamily = new FontFamily("fonts:HarmonyOS_Sans_SC#HarmonyOS Sans SC") },
                 }
             })
             .LogToTrace()

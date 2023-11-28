@@ -140,6 +140,15 @@
   <data name="InstallButton" xml:space="preserve">
     <value>NULL</value>
   </data>
+    <data name="InstallStage1" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+    <data name="InstallStage2" xml:space="preserve">
+    <value>NULL</value>
+  </data>
+    <data name="InstallStage3" xml:space="preserve">
+    <value>NULL </value>
+  </data>
   <data name="JoyECS" xml:space="preserve">
     <value>JoyEngine ゲームエンジン</value>
   </data>
@@ -147,10 +156,10 @@
     <value>NULL</value>
   </data>
   <data name="ModuleManageSubtitle" xml:space="preserve">
-    <value>NULL</value>
+    <value>NULL </value>
   </data>
   <data name="ModuleManageTitle" xml:space="preserve">
-    <value>NULL</value>
+    <value>NULL </value>
   </data>
     <data name="ResetConfig" xml:space="preserve">
     <value>NULL</value>

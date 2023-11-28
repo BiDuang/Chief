@@ -5,14 +5,14 @@ using Chief.Utils;
 
 namespace Chief.ViewModels;
 
-public class ModuleManageViewModel : PageViewModel
+public class ModuleManageViewModel(ModuleSource source) : PageViewModel
 {
-    private readonly ModuleSource _source;
-    public ModuleManageViewModel() => _source = ModuleSource.Woolang;
-    public ModuleManageViewModel(ModuleSource source) => _source = source;
+    public ModuleManageViewModel() : this(ModuleSource.Woolang)
+    {
+    }
 
     public string SourceName =>
-        _source switch
+        source switch
         {
             ModuleSource.Woolang =>
                 Resource.ResourceManager.GetString("Woolang", Cache.Config.Instance!.GetAppCultureInfo())!,
