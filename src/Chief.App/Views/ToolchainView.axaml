@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Chief.App.Views.ToolchainView">
+    <WrapPanel>
+        <!-- Card 展示 Woo driver、Bao zi、JoyECS Engine 当前版本和更新状态 -->
+        <!-- 但是不会写自定义控件 -->
+    </WrapPanel>
+</UserControl>
