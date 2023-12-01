@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="src/Chief.App/App.axaml" value="src/Chief.App/Chief.App.csproj" />
+        <entry key="src/Chief.App/Controls/Card.axaml" value="src/Chief.App/Chief.App.csproj" />
+        <entry key="src/Chief.App/MainWindow.axaml" value="src/Chief.App/Chief.App.csproj" />
+        <entry key="src/Chief.App/Styles/ControlThemes/CardStyles.axaml" value="src/Chief.App/Chief.App.csproj" />
+        <entry key="src/Chief.App/Styles/Controls.axaml" value="src/Chief.App/Chief.App.csproj" />
+        <entry key="src/Chief.App/Views/HomeView.axaml" value="src/Chief.App/Chief.App.csproj" />
+        <entry key="src/Chief.App/Views/PackageView.axaml" value="src/Chief.App/Chief.App.csproj" />
+        <entry key="src/Chief.App/Views/SettingsView.axaml" value="src/Chief.App/Chief.App.csproj" />
+        <entry key="src/Chief.App/Views/ToolchainView.axaml" value="src/Chief.App/Chief.App.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

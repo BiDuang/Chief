@@ -1,0 +1,10 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Chief.App.Views.PackageView">
+    <!-- 这条提示应该位于中央最顶层，遮盖原先控件 -->
+    <controls:InfoBar Margin="15" Title="Attention" Severity="Warning" Message="Baozi(Package manager) not detected. Install it at Toolchain page first." IsOpen="True"/>
+</UserControl>

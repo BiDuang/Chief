@@ -1,0 +1,29 @@
+<window:AppWindow xmlns="https://github.com/avaloniaui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:ui="using:FluentAvalonia.UI.Controls"
+                  xmlns:window="using:FluentAvalonia.UI.Windowing"
+                  xmlns:fi="using:FluentIcons.FluentAvalonia"
+                  xmlns:models="clr-namespace:Chief.App.Models"
+                  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                  Width="800" Height="600"
+                  DataContext="{StaticResource Locator}"
+                  x:Class="Chief.App.MainWindow"
+                  Title="Chief Dev">
+    <ui:NavigationView x:Name="Navigation" IsBackEnabled="{Binding #Root.CanGoBack}" IsSettingsVisible="False"
+                       ItemInvoked="Navigation_OnItemInvoked">
+        <ui:NavigationView.MenuItemTemplate>
+            <DataTemplate DataType="models:PageLink">
+                <ui:NavigationViewItem Content="{Binding Title}" Tag="{Binding}">
+                    <ui:NavigationViewItem.IconSource>
+                        <fi:SymbolIconSource Symbol="{Binding Icon}" />
+                    </ui:NavigationViewItem.IconSource>
+                </ui:NavigationViewItem>
+            </DataTemplate>
+        </ui:NavigationView.MenuItemTemplate>
+
+        <ui:Frame x:Name="Root" />
+    </ui:NavigationView>
+
+</window:AppWindow>
